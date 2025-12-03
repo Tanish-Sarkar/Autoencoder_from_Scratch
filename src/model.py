@@ -4,16 +4,12 @@ from torch import nn
 
 class Autoencoder(nn.Module):
     """
-    Simple fully-connected autoencoder for tabular data.
-
-    Args:
-        input_dim (int): Number of input features.
-        latent_dim (int): Size of the bottleneck latent space.
+    Fully-connected autoencoder for tabular datasets.
     """
     def __init__(self, input_dim: int, latent_dim: int = 16):
         super().__init__()
 
-        # Encoder: input -> latent
+        # Encoder: input_dim → latent_dim
         self.encoder = nn.Sequential(
             nn.Linear(input_dim, 128),
             nn.ReLU(),
@@ -22,7 +18,7 @@ class Autoencoder(nn.Module):
             nn.Linear(64, latent_dim),
         )
 
-        # Decoder: latent -> input
+        # Decoder: latent_dim → input_dim
         self.decoder = nn.Sequential(
             nn.Linear(latent_dim, 64),
             nn.ReLU(),
