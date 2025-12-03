@@ -12,13 +12,12 @@ from torch.utils.data import DataLoader, TensorDataset
 from torch import nn
 from torch.optim import Adam
 
-from model import build_autoencoder
+from src.model import build_autoencoder
 
 
 def load_creditcard_data(csv_path: str):
     """
     Load the Credit Card Fraud dataset from a CSV file.
-
     Expected to have a 'Class' column where:
       - 0 = normal transaction
       - 1 = fraud (anomaly)
@@ -29,7 +28,7 @@ def load_creditcard_data(csv_path: str):
     
     X = df.drop(columns=['Class']).values.astype(np.float32)
     y = df['Class'].values.astype(np.float32)
-
+    return X, y
 
 def prepare_datasets(X , y, test_size= 0.2, val_size = 0.1, random_state=42):
     """
